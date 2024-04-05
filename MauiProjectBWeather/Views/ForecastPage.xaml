@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiProjectBWeather.Views.ForecastPage">
+    <ContentPage.Content>
+        <StackLayout>
+                <Button Text="Refresh" Clicked="Button_Clicked" FontSize="30" />
+
+
+                <ListView x:Name="GGroupedForecast" IsGroupingEnabled="true" HasUnevenRows="true">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                    <Label Text="{x:Binding Key, StringFormat='{0:D}'}" FontSize="22" Margin="25" TextColor="Blue" HorizontalOptions="StartAndExpand">
+                                    </Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <HorizontalStackLayout>
+                                    <Image WidthRequest="40" Source="{Binding Icon}" IsVisible="True">
+                                    </Image>
+                                    <VerticalStackLayout Padding="10" Spacing="5">
+                                        <Label Text="{Binding DateTime, StringFormat='{0:HH:mm}'}" FontAttributes="Bold" FontSize="14" />
+                                        <Label Text="{Binding Description}" FontAttributes="Bold, Italic" FontSize="14"/>
+                                        <Label FontFamily="monospace" FontSize="15">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}Temperature: {0} degrees C, wind: {1} m/s">
+                                                    <Binding Path="Temperature" />
+                                                    <Binding Path="WindSpeed" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
